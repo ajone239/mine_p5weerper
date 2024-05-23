@@ -47,6 +47,7 @@ function mousePressed() {
 
   if (square.is_bomb) {
     game_over = true
+    grid.unhide_all_bombs()
   }
 }
 
@@ -187,6 +188,17 @@ class Grid {
     }
   }
 
+  unhide_all_bombs() {
+    for (let i = 0; i < this.width_in_squares; i++) {
+      for (let j = 0; j < this.height_in_squares; j++) {
+        let square = this.grid[i][j]
+
+        if (square.is_bomb) {
+          square.hidden = false
+        }
+      }
+    }
+  }
 
   is_in_bounds(x, y) {
     return x >= 0 &&
@@ -223,7 +235,7 @@ class Square {
     rect(x, y, square_size, square_size)
 
     if (this.is_bomb) {
-      fill(255, 0, 0)
+      fill(200, 0, 50)
       ellipse(
         x + (size / 2),
         y + (size / 2),
