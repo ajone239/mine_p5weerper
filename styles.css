@@ -1,0 +1,43 @@
+/* style.css */
+body {
+  margin: 0;
+  padding-top: 10px ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0a0a0a;
+  box-sizing: border-box;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 10px ;
+  width: 100%;
+  background-color: #1f1f1f;
+  color: #fff;
+  text-align: center;
+  padding: 3px 0;
+}
+
+canvas {
+  border: 3px solid #555;
+  background-color: #fff;
+}
+
+.container {
+  text-align: center;
+}
+
+.instructions {
+    color: #fff;
+    width: 200px;
+    height: 100px;
+    background-color: #0a0a0a;
+    border: 1px solid #000;
+    margin-top: 20px; /* Adjust margin top to add space between canvas and div */
+}
