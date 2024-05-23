@@ -1,6 +1,6 @@
 const width = 600
 const height = 600
-const size = 15
+const size = 30
 
 let grid
 
@@ -16,6 +16,13 @@ function draw() {
   grid.show()
 }
 
+function mousePressed() {
+  let x = floor(mouseX / size)
+  let y = floor(mouseY / size)
+
+  grid.grid[x][y].hidden = false
+}
+
 class Grid {
   constructor(size, width, height) {
     this.square_size = size
@@ -26,19 +33,36 @@ class Grid {
 
     for (let i = 0; i < this.width_in_squares; i++) {
       this.grid[i] = new Array(this.height_in_squares)
+      for (let j = 0; j < this.height_in_squares; j++) {
+        this.grid[i][j] = new Square()
+      }
     }
   }
 
   show() {
     stroke(100)
-    fill(50)
 
     for (let i = 0; i < this.width_in_squares; i++) {
       for (let j = 0; j < this.height_in_squares; j++) {
-        let x = i * this.width_in_squares
-        let y = j * this.height_in_squares
-        rect(x, y, this.width_in_squares, this.height_in_squares)
+        let x = i * this.square_size
+        let y = j * this.square_size
+
+        let square = this.grid[i][j]
+
+        if (square.hidden) {
+          fill(0, 50, 0)
+        } else {
+          fill(200)
+        }
+
+        rect(x, y, this.square_size, this.square_size)
       }
     }
+  }
+}
+
+class Square {
+  constructor() {
+    this.hidden = true
   }
 }
