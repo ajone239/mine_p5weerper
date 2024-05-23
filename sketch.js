@@ -1,7 +1,7 @@
 const width = 600
 const height = 600
-const size = 30
-const bomb_count = 50
+const size = 50
+const bomb_count = 10
 
 let grid
 let game_over
@@ -20,12 +20,16 @@ function draw() {
   background(0);
   grid.show()
   grid.unhide_connected_zeroes()
-  if (game_over) {
+
+  let won = grid.has_won()
+
+  if (game_over || won) {
+    message = won ? "Winner!" : "Game Over!"
     stroke(0)
     fill(255)
     textSize(50)
     textAlign(CENTER);
-    text(`Game over`, width / 2, height / 2)
+    text(message, width / 2, height / 2)
     noLoop()
   }
 }
@@ -93,6 +97,18 @@ class Grid {
       let square = this.grid[x][y]
       square.make_bomb()
     }
+  }
+
+  has_won() {
+    let won = true
+    for (let i = 0; i < this.width_in_squares; i++) {
+      for (let j = 0; j < this.height_in_squares; j++) {
+        let square = this.grid[i][j]
+
+        won &= square.is_bomb || !square.hidden
+      }
+    }
+    return won
   }
 
   count_all_bombs() {
@@ -165,6 +181,7 @@ class Grid {
       }
     }
   }
+
 
   is_in_bounds(x, y) {
     return x >= 0 &&
