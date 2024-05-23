@@ -151,7 +151,7 @@ class Grid {
       for (let j = 0; j < this.height_in_squares; j++) {
         let square = this.grid[i][j]
 
-        if (square.hidden) {
+        if (square.hidden || square.bombs_near > 0) {
           continue;
         }
 
@@ -175,7 +175,12 @@ class Grid {
 
         let neighbor = this.grid[x][y]
 
-        if (neighbor.bombs_near == 0 && !neighbor.is_bomb) {
+        if (
+          (
+            neighbor.bombs_near == 0 ||
+            neighbor.bombs_near == 1
+          ) &&
+          !neighbor.is_bomb) {
           neighbor.unhide()
         }
       }
