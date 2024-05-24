@@ -1,7 +1,7 @@
 const width = 600
 const height = 600
-const size = 50
-const bomb_count = 10
+const size = 30
+const bomb_count = 50
 
 let grid
 let game_over
