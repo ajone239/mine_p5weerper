@@ -43,6 +43,16 @@ function mousePressed() {
   let y = floor(mouseY / size)
 
   let square = grid.grid[x][y]
+
+  if (mouseButton === RIGHT && square.hidden) {
+    square.flag()
+    return
+  }
+
+  if (square.flagged) {
+    return
+  }
+
   square.unhide()
 
   if (square.is_bomb) {
@@ -181,7 +191,9 @@ class Grid {
             neighbor.bombs_near == 0 ||
             neighbor.bombs_near == 1
           ) &&
-          !neighbor.is_bomb) {
+          !neighbor.is_bomb &&
+          !neighbor.flagged
+        ) {
           neighbor.unhide()
         }
       }
@@ -211,12 +223,17 @@ class Grid {
 class Square {
   constructor() {
     this.hidden = true
+    this.flagged = false
     this.is_bomb = false
     this.bombs_near = 0
   }
 
   unhide() {
     this.hidden = false
+  }
+
+  flag() {
+    this.flagged ^= true
   }
 
   make_bomb() {
@@ -226,6 +243,12 @@ class Square {
   show(x, y, square_size) {
     fill(100)
     rect(x, y, square_size, square_size)
+
+    if (this.flagged) {
+      fill(0, 200, 50)
+      rect(x, y, square_size, square_size)
+      return
+    }
 
     if (this.hidden) {
       return
