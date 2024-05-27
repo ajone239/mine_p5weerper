@@ -44,7 +44,16 @@ function mousePressed() {
 
   let square = grid.grid[x][y]
 
-  if (mouseButton === RIGHT && square.hidden) {
+  if (
+    (
+      mouseButton === RIGHT
+        (
+          keyCode == SHIFT &&
+          mouseIsPressed
+        )
+    ) &&
+    square.hidden
+  ) {
     square.flag()
     return
   }
