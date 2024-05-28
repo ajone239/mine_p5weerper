@@ -46,11 +46,11 @@ function mousePressed() {
 
   if (
     (
-      mouseButton === RIGHT
-        (
-          keyCode == SHIFT &&
-          mouseIsPressed
-        )
+      mouseButton === RIGHT ||
+      (
+        keyCode == SHIFT &&
+        mouseIsPressed
+      )
     ) &&
     square.hidden
   ) {
